@@ -147,7 +147,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 
 				<a href="index.php"><button class="btn btn-default btn-large" style="float: left;"><i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
 				<div style="float:right;">
-					<button style="float:left;" class="btn btn-success btn-mini"><a href="javascript:Clickheretoprint()"> Print</button></a>
+					<button style="float:left;" class="btn btn-success btn-large"><a href="javascript:Clickheretoprint()"><i class="icon-print"></i> Print</button></a>
 				</div>
 				<br>
 				<br>

@@ -133,7 +133,7 @@ $finalcode = 'RS-' . createRandomPassword();
 
 				<div style="margin-top: -19px; margin-bottom: 21px;">
 					<a href="index.php"><button class="btn btn-default btn-large" style="float: none;"><i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
-					<button style="float:right;" class="btn btn-success btn-mini"><a href="javascript:Clickheretoprint()"> Print</button></a>
+					<button style="float:right;" class="btn btn-success btn-large"><a href="javascript:Clickheretoprint()"><i class="icon-print"></i> Print</button></a>
 
 				</div>
 

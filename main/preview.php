@@ -311,7 +311,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 				</div>
 			</div>
 			<div class="pull-right" style="margin-right:100px;">
-				<a href="javascript:Clickheretoprint()" style="font-size:20px;"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
+				<a href="javascript:Clickheretoprint()" style="font-size:20px;"><button class="btn btn-success btn-large"><i class="icon-print"></i><i class="icon-print"></i> Print</button></a>
 			</div>
 		</div>
 	</div>
