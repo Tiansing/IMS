@@ -3,8 +3,9 @@
 
 <head>
 	<title>
-		POS
+		Yuan Rose
 	</title>
+	<link rel="shortcut icon" href="img/yuanrose.png">
 	<link href="css/bootstrap.css" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" href="css/DT_bootstrap.css">

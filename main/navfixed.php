@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="shortcut icon" href="main/img/yuanrose.png">
 <style>
   #clock {
     font-size: 20px;
@@ -21,6 +22,9 @@
           <li><a><i class="icon-user icon-large"></i> Welcome:<strong> <?php echo $_SESSION['SESS_LAST_NAME']; ?></strong></a></li>
           <li><a> <i class="icon-calendar icon-large"></i>
               <?php
+              date_default_timezone_set('Asia/Manila'); // Set the time zone to Philippines
+
+
               $Today = date('y:m:d', time());
               $new = date('l, F d, Y', strtotime($Today));
               echo $new;

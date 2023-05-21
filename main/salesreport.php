@@ -5,8 +5,9 @@ require_once('auth.php');
 
 <head>
 	<title>
-		POS
+		Yuan Rose
 	</title>
+	<link rel="shortcut icon" href="img/yuanrose.png">
 	<link href="css/bootstrap.css" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" href="css/DT_bootstrap.css">
@@ -27,7 +28,7 @@ require_once('auth.php');
 
 	<link href="../style.css" media="screen" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="tcal.css" />
-	<script type="text/javascript" src="tcal.js"></script>
+	<script src="tcalcal.js"></script>
 	<script language="javascript">
 		function Clickheretoprint() {
 			var disp_setting = "toolbar=yes,location=no,directories=yes,menubar=yes,";
@@ -177,11 +178,11 @@ $finalcode = 'RS-' . createRandomPassword();
 									<td><?php echo $row['invoice_number']; ?></td>
 									<td><?php
 										$dsdsd = $row['amount'];
-										echo formatMoney($dsdsd, true);
+										echo "&#8369;" . formatMoney($dsdsd, true);
 										?></td>
 									<td><?php
 										$zxc = $row['profit'];
-										echo formatMoney($zxc, true);
+										echo "&#8369;" . formatMoney($zxc, true);
 										?></td>
 								</tr>
 							<?php
@@ -217,7 +218,7 @@ $finalcode = 'RS-' . createRandomPassword();
 									$results->execute();
 									for ($i = 0; $rows = $results->fetch(); $i++) {
 										$dsdsd = $rows['sum(amount)'];
-										echo formatMoney($dsdsd, true);
+										echo "&#8369;" . formatMoney($dsdsd, true);
 									}
 									?>
 								</th>
@@ -229,7 +230,7 @@ $finalcode = 'RS-' . createRandomPassword();
 									$resultia->execute();
 									for ($i = 0; $cxz = $resultia->fetch(); $i++) {
 										$zxc = $cxz['sum(profit)'];
-										echo formatMoney($zxc, true);
+										echo "&#8369;" . formatMoney($zxc, true);
 									}
 									?>
 

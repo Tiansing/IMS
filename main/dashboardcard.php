@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 
 <!--sa poip up-->
 <script src="jeffartagame.js" type="text/javascript" charset="utf-8"></script>
@@ -12,6 +12,10 @@
 <link href="src/facebox.css" media="screen" rel="stylesheet" type="text/css" />
 <script src="lib/jquery.js" type="text/javascript"></script>
 <script src="src/facebox.js" type="text/javascript"></script>
+
+
+
+
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('a[rel*=facebox]').facebox({
@@ -57,6 +61,20 @@
 
     .table_card {
         width: 300px;
+        height: auto;
+        margin: 10px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .table_cardo {
+        width: 800px;
         height: auto;
         margin: 10px;
         background-color: #fff;
@@ -244,25 +262,36 @@
         </div>
 
         <div class="card-infos">
-
             <?php
 
-            $query = "SELECT SUM(amount) AS total_sales, COUNT(DISTINCT DATE(date)) AS num_days FROM sales";
+            $currentDate = date('Y-m-d');
+
+            $query = "SELECT SUM(amount) AS total_sales, COUNT(DISTINCT DATE(date)) as num_days FROM sales ORDER BY date ";
             $avg_query = mysqli_query($mysqli, $query);
+            $total_sales1 = 0;
+
             $row = $avg_query->fetch_assoc();
-            if (!empty($row["total_sales"])) {
-
-                $total_sales = $row["total_sales"];
-                $num_days = $row["num_days"];
-                $avg_sales_per_day = $total_sales / $num_days;
+            $total_sales = $row["total_sales"];
+            $total_sales1 += $total_sales;
+            $num_days = $row["num_days"];
 
 
+            if (!empty($row['total_sales'])) {
+                $avg_sales_per_day = $total_sales1 / $num_days;
                 $formatted_number = number_format($avg_sales_per_day);
                 $thousands = explode(',', $formatted_number)[0];
-                $re = $thousands . "k";
+                if ($avg_sales_per_day > 1000) {
+                    $re = $thousands . "k";
+                } elseif ($avg_sales_per_day > 100) {
+                    $re = $thousands . "h";
+                } else {
+
+                    $re = $thousands;
+                }
             } else {
                 $re = 0;
             }
+
             ?>
             <p><?php echo "&#8369;" . $re; ?></p>
             <h3>Avg Sales Per Day</h3>
@@ -278,7 +307,6 @@
                 <tr>
                     <th width="5%">Ranking</th>
                     <th width="20%">Category</th>
-
                     <th width="40%">Item Name</th>
                 </tr>
             </thead>
@@ -310,9 +338,75 @@
             </tbody>
         </table>
 
+
     </div>
 
+    <?php $restt = $db->prepare("SELECT * FROM sales_order  WHERE date = DATE(now())");
+    $restt->execute();
 
+    $resttt = $db->prepare("SELECT sum(price) as total_sale FROM sales_order  WHERE date = DATE(now())");
+    $resttt->execute(); ?>
+    <!-- ---------DAILY SALES----------- -->
+    <div class="table_cardo">
+
+        <h5 style="align-items: center; text-align:center;"><strong>Daily Sales</strong></h5>
+
+        <table class="table table-bordered" id="dsalesTable" data-responsive="table" style="text-align: center;">
+
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Item Name</th>
+                    <th>Supplier</th>
+                    <th>Selling Price</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php
+
+                foreach ($restt as $row) {
+
+                    $catid = $row['category'];
+                ?>
+
+                    <tr>
+
+                        <?php
+
+                        $query = "SELECT * FROM category WHERE cat_id =$catid";
+                        $cat_query = mysqli_query($mysqli, $query);
+
+                        while ($rows = mysqli_fetch_assoc($cat_query)) {
+
+
+                        ?>
+                            <td><?php echo  $rows['cat_title']; ?></td>
+                        <?php  } ?>
+                        <td><?php echo  $row['product_code']; ?></td>
+                        <td><?php echo  $row['supplier']; ?></td>
+                        <td><?php echo  "&#8369; " . number_format($row['price']); ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+            <tfoot>
+                <tr>
+
+                    <th></th>
+                    <th></th>
+                    <th>Total:</th>
+                    <?php foreach ($resttt as $rowan) {
+                        $totalsal = $rowan['total_sale'];
+                    }       ?>
+                    <th><?php echo '&#8369; ' . number_format($totalsal); ?></th>
+
+
+
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
 
 
 
@@ -333,6 +427,44 @@ $results->execute();
 
 ?>
 <script>
+    $(document).ready(function() {
+        $('#dsalesTable').DataTable({
+                autoWidth: false,
+                columns: [{
+                        width: '5px'
+                    },
+                    {
+                        width: '50px'
+                    },
+                    {
+                        width: '50px'
+                    },
+                    {
+                        width: '50px'
+                    }
+                ],
+                order: false,
+                "scrollY": "700px",
+                "scrollCollapse": true,
+                "paging": false,
+
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+
+
+                buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            })
+            .buttons()
+            .container()
+            .appendTo("#dsalesTable_wrapper .col-md-6:eq(0)");
+
+
+    });
+
+
+
+
     google.charts.load("current", {
         packages: ["corechart"]
     });

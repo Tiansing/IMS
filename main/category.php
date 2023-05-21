@@ -2,8 +2,9 @@
 
 <head>
 	<title>
-		POS
+		Yuan Rose
 	</title>
+	<link rel="shortcut icon" href="img/yuanrose.png">
 	<?php
 	require_once('auth.php');
 	?>

@@ -15,8 +15,9 @@
 		})
 	</script>
 	<title>
-		POS
+		Yuan Rose
 	</title>
+	<link rel="shortcut icon" href="img/yuanrose.png">
 	<?php
 	require_once('auth.php');
 	?>
@@ -164,7 +165,12 @@ $finalcode = 'RS-' . createRandomPassword();
 					<form action="incoming.php" method="post">
 
 						<input type="hidden" name="pt" value="<?php echo $_GET['id']; ?>" />
-						<input type="hidden" name="invoice" value="<?php echo $_GET['invoice']; ?>" />
+						<input type="text" oninvalid="this.setCustomValidity('Please enter Sales Invoice No.')" oninput="this.setCustomValidity('')" id="invoice" name="invoice" placeholder="Enter Sales Invoice No." value="<?php if (!empty($_SESSION['invoice_no'])) {
+																																																									echo $_GET['invoice'];
+																																																								} else {
+																																																									echo "";
+																																																								}
+																																																								?>" required /> <button type="button" id="btnsino" class="btn btn-info btn-small" style="width: 130px; height:35px; margin-top:-5px;"><i class="icon-refresh icon-large"></i> Generate SI no.</button><br>
 
 						<select name="category" style="width:350px; " class="select2" data-placeholder="Select Category" required>
 							<option></option>
@@ -188,14 +194,13 @@ $finalcode = 'RS-' . createRandomPassword();
 
 						<input type="number" name="qty" value="1" min="1" placeholder="Qty" autocomplete="off" style="width: 68px; height:30px; padding-top:6px; padding-bottom: 4px; margin-right: 4px; font-size:15px;" / required>
 						<input type="hidden" name="discount" value="" autocomplete="off" style="width: 68px; height:30px; padding-top:6px; padding-bottom: 4px; margin-right: 4px; font-size:15px;" />
-						<input type="hidden" name="date" value="<?php echo date("m/d/y"); ?>" />
-						<Button type="submit" class="btn btn-info" style="width: 123px; height:35px; margin-top:-5px;" /><i class="icon-plus-sign icon-large"></i> Add</button>
+						<input type="hidden" name="date" value="<?php echo date('Y-m-d'); ?>" />
+						<button type="submit" id="addsino" class="btn btn-info" style="width: 123px; height:35px; margin-top:-5px;"><i class="icon-plus-sign icon-large"></i> Add</button>
 					</form>
 					<table class="table table-bordered" id="resultTable" data-responsive="table">
 						<thead>
 							<tr>
 								<th> Item Name </th>
-								<th> Generic Name </th>
 								<th> Category</th>
 								<th> Price </th>
 								<th> Qty </th>
@@ -218,7 +223,7 @@ $finalcode = 'RS-' . createRandomPassword();
 								<tr class="record">
 									<td hidden><?php echo $row['product']; ?></td>
 									<td><?php echo $row['product_code']; ?></td>
-									<td><?php echo $row['gen_name']; ?></td>
+
 									<?php $rslt = $db->prepare("SELECT * FROM category WHERE cat_id= $catid");
 									$rslt->bindParam(':l', $catid);
 									$rslt->execute();
@@ -348,6 +353,20 @@ $finalcode = 'RS-' . createRandomPassword();
 				$('#my-dropdown').select2({
 					placeholder: 'Search for an option'
 				});
+
+
+
+
+				// Handle button click event
+				$("#btnsino").click(function() {
+					// Retrieve PHP value using AJAX or from a hidden input field, replace 'phpValue' with the actual PHP value
+					var phpValue = "<?php echo $_GET['invoice']; ?>";
+
+					// Set the value of the input field
+					$("#invoice").val(phpValue);
+				});
+
+
 			});
 		</script>
 </body>

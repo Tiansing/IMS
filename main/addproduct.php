@@ -5,8 +5,8 @@
 	</center>
 	<hr>
 	<div id="ac">
-		<span>Item Name : </span><input type="text" style="width:265px; height:30px;" name="code"><br>
-		<span>Generic Name : </span><input type="text" style="width:265px; height:30px;" name="gen" Required /><br>
+		<span>Item Name : </span><input type="text" style="width:265px; height:30px;" name="code">
+		<input type="hidden" style="width:265px; height:30px;" name="gen" />
 
 		<span>Category : </span>
 		<select name="category" style="width:265px; height:30px; margin-left:-5px;">
@@ -23,8 +23,8 @@
 			}
 			?>
 		</select>
-		<br>
-		<span>Date Arrival: </span><input type="date" style="width:265px; height:30px;" name="date_arrival" /><br>
+
+		<input type="hidden" style="width:265px; height:30px;" name="date_arrival" />
 
 		<span>Selling Price : </span><input type="text" id="txt1" style="width:265px; height:30px;" name="price" onkeyup="sum();" Required><br>
 		<span>Original Price : </span><input type="text" id="txt2" style="width:265px; height:30px;" name="o_price" onkeyup="sum();" Required><br>

@@ -3,7 +3,7 @@ session_start();
 include('../connect.php');
 
 $a = $_POST['invoice'];
-
+$_SESSION['invoice_no'] = $a;
 $b = $_POST['product'];
 $c = $_POST['qty'];
 $w = $_POST['pt'];

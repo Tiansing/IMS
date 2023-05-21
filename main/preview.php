@@ -2,7 +2,8 @@
 <html>
 
 <head>
-	<?php require_once('auth.php'); ?>
+	<?php require_once('auth.php');
+	date_default_timezone_set('Asia/Manila'); ?>
 	<title>
 		POS
 	</title>
@@ -163,11 +164,11 @@ and get more free JavaScript, CSS and DHTML scripts! */
 									?>
 								</div>
 							</div>
-							<div style="width: 136px; float: left; height: 70px;">
+							<div style="width: 186px; float: left; height: 70px;">
 								<table cellpadding="3" cellspacing="0" style="font-family: arial; font-size: 12px;text-align:left;width : 100%;">
 
 									<tr>
-										<td>OR No. :</td>
+										<td>Sales Invoice No. :</td>
 										<td><?php echo $invoice ?></td>
 									</tr>
 									<tr>
@@ -187,7 +188,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 										<th> Item Name </th>
 										<th> Qty </th>
 										<th> Price </th>
-										<th> Discount </th>
+
 										<th> Amount </th>
 									</tr>
 								</thead>
@@ -219,12 +220,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 												echo "&#8369;" . formatMoney($ppp, true);
 												?>
 											</td>
-											<td>
-												<?php
-												$ddd = $row['discount'];
-												echo  formatMoney($ddd, true);
-												?>
-											</td>
+
 											<td>
 												<?php
 												$dfdf = $row['amount'];
@@ -237,8 +233,8 @@ and get more free JavaScript, CSS and DHTML scripts! */
 									?>
 
 									<tr>
-										<td colspan="5" style=" text-align:right;"><strong style="font-size: 12px;">Total: &nbsp;</strong></td>
-										<td colspan="2"><strong style="font-size: 12px;">
+										<td colspan="4" style=" text-align:right;"><strong style="font-size: 12px;">Total: &nbsp;</strong></td>
+										<td colspan="1"><strong style="font-size: 12px;">
 												<?php
 												$sdsd = $_GET['invoice'];
 												$resultas = $db->prepare("SELECT sum(amount) FROM sales_order WHERE invoice= :a");
@@ -254,8 +250,8 @@ and get more free JavaScript, CSS and DHTML scripts! */
 									<?php if ($pt == 'cash') {
 									?>
 										<tr>
-											<td colspan="5" style=" text-align:right;"><strong style="font-size: 12px; color: #222222;">Cash Tendered:&nbsp;</strong></td>
-											<td colspan="2"><strong style="font-size: 12px; color: #222222;">
+											<td colspan="4" style=" text-align:right;"><strong style="font-size: 12px; color: #222222;">Cash Tendered:&nbsp;</strong></td>
+											<td colspan="1"><strong style="font-size: 12px; color: #222222;">
 													<?php
 													echo "&#8369;" . formatMoney($cash, true);
 													?>
@@ -265,7 +261,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 									}
 									?>
 									<tr>
-										<td colspan="5" style=" text-align:right;"><strong style="font-size: 12px; color: #222222;">
+										<td colspan="4" style=" text-align:right;"><strong style="font-size: 12px; color: #222222;">
 												<font style="font-size:20px;">
 													<?php
 													if ($pt == 'cash') {
@@ -276,7 +272,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 													}
 													?>&nbsp;
 											</strong></td>
-										<td colspan="2"><strong style="font-size: 15px; color: #222222;">
+										<td colspan="1"><strong style="font-size: 15px; color: #222222;">
 												<?php
 												function formatMoney($number, $fractional = false)
 												{
@@ -310,7 +306,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 					</div>
 				</div>
 			</div>
-			<div class="pull-right" style="margin-right:100px;">
+			<div class="pull-right" style="margin-right:130px;">
 				<a href="javascript:Clickheretoprint()" style="font-size:20px;"><button class="btn btn-success btn-large"><i class="icon-print"></i><i class="icon-print"></i> Print</button></a>
 			</div>
 		</div>
