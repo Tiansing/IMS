@@ -199,7 +199,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 
 
 					<div style="text-align:center;">
-						<font style="color:#f0ad4e; font:bold 22px 'Aleo';">[&#11044;]</font> Products are below Re-order level
+						<font style="color:#f0ad4e; font:bold 22px 'Aleo';">[&#11044;]</font> Products are below Safety Stock level
 					</div>
 					<div style="text-align:center;">
 						<font style="color:#d9534f; font:bold 22px 'Aleo';">&nbsp;&nbsp;&nbsp;&nbsp;[&#11044;]</font> Products are Out of Stock
@@ -219,7 +219,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 
 							<th width="6%"> Original Price </th>
 							<th width="6%"> Selling Price </th>
-							<th width="7%"> Re-Order Level </th>
+							<th width="7%"> Safety Stock </th>
 							<th width="5%"> Qty Left </th>
 							<th width="8%"> Total </th>
 							<th width="8%"> Action </th>

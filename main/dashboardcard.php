@@ -176,7 +176,7 @@
 
             <div class="card-info">
 
-                <h3>Re-Order</h3>
+                <h3>Safety Stock</h3>
 
 
                 <?php $query = "SELECT * FROM products";

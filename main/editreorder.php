@@ -68,7 +68,7 @@ for ($i = 0; $row = $result->fetch(); $i++) {
 				?>
 			</select><br>
 			<span>QTY Left: </span><input type="number" style="width:265px; height:30px;" min="0" name="qty" value="<?php echo $row['qty']; ?>" /><br>
-			<span>Re-Order Point: </span><input type="number" style="width:265px; height:30px;" min="0" name="sold" value="<?php echo $row['reorder']; ?>" /><br>
+			<span>Safety Stock: </span><input type="number" style="width:265px; height:30px;" min="0" name="sold" value="<?php echo $row['reorder']; ?>" /><br>
 
 			<div style="float:right; margin-right:10px;">
 

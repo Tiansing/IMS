@@ -174,11 +174,11 @@ and get more free JavaScript, CSS and DHTML scripts! */
 			</div><!--/span-->
 			<div class="span10">
 				<div class="contentheader">
-					<i class="fa-solid fa-boxes-stacked"></i> Re-Order
+					<i class="fa-solid fa-boxes-stacked"></i> Safety Stock
 				</div>
 				<ul class="breadcrumb">
 					<li><a href="index.php">Dashboard</a></li> /
-					<li class="active">Re-Order</li>
+					<li class="active">Safety Stock</li>
 				</ul>
 
 				<div style="margin-top: -19px; margin-bottom: 21px;">
@@ -204,7 +204,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 							<th width="23%"> Item Category</th>
 							<th width="12%"> Supplier</th>
 							<th width="9%"> Available</th>
-							<th width="10%">Re-Order Level</th>
+							<th width="10%">Safety Stock</th>
 							<th width="9%">Action</th>
 						</tr>
 					</thead>

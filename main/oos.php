@@ -205,7 +205,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 							<th width="23%"> Item Category</th>
 							<th width="12%"> Supplier</th>
 							<th width="9%"> Available</th>
-							<th width="10%">Re-Order Level</th>
+							<th width="10%">Safety Stock</th>
 							<th width="9%">Action</th>
 						</tr>
 					</thead>
