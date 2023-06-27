@@ -221,6 +221,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 							<th width="6%"> Selling Price </th>
 							<th width="7%"> Safety Stock </th>
 							<th width="5%"> Qty Left </th>
+							<th width="5%"> Order Quantity</th>
 							<th width="8%"> Total </th>
 							<th width="8%"> Action </th>
 						</tr>
@@ -272,6 +273,36 @@ and get more free JavaScript, CSS and DHTML scripts! */
 
 
 							$category = $row['prod_cat_id'];
+							// ======START SOLD QTY======
+							$query1 = "SELECT SUM(qty) AS soldqty FROM sales_order WHERE product = $product_id";
+							$soldqtyquery = mysqli_query($mysqli, $query1);
+							while ($row2 = mysqli_fetch_assoc($soldqtyquery)) {
+								$soldqty = $row2["soldqty"];
+
+								$query2 = "UPDATE products SET sold_qty = $soldqty WHERE product_id = $product_id";
+								$soldqtyquery1 = mysqli_query($mysqli, $query2);
+							}
+							// ========END SOLD QTY=======
+
+							// ======START ORD QTY======
+							$query3 = "SELECT sold_qty, reorder, qty FROM products WHERE product_id = $product_id";
+							$ordqtyquery = mysqli_query($mysqli, $query3);
+							while ($row3 = mysqli_fetch_assoc($ordqtyquery)) {
+								$ordsldqty = $row3["sold_qty"];
+								$ordsafety = $row3["reorder"];
+								$ordqtyleft = $row3["qty"];
+								$ordqty = $ordsldqty + $ordsafety - $ordqtyleft;
+								if ($ordqty < 0) {
+									$order_quantity = 0;
+								} else {
+									$order_quantity = $ordqty;
+								}
+								if ($soldqty > $ordqtyleft) {
+									$query4 = "UPDATE products SET sold_qty = 0 WHERE product_id = $product_id";
+									$soldqtyreset_query = mysqli_query($mysqli, $query4);
+								}
+							}
+							// ========END ORD QTY=======
 
 							$query = "SELECT * FROM category WHERE cat_id = $category";
 							$catquery = mysqli_query($mysqli, $query);
@@ -290,6 +321,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 							}
 
 						?>
+
 							<td><?php echo $product_code; ?></td>
 
 
@@ -311,7 +343,7 @@ and get more free JavaScript, CSS and DHTML scripts! */
 							<td style="text-align:center;">
 								<h4 class="badge2"> <?php echo $qty; ?></h4>
 							</td>
-
+							<td><?php echo $order_quantity; ?></td>
 							<td>&#8369;<?php
 										$total = $totals;
 										echo formatMoney($total, true);
